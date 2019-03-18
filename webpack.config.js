@@ -2,7 +2,7 @@ const path = require("path");
 const webpack = require("webpack");
 
 module.exports = {
-  entry: "./renderer.js",
+  entry: "./src/index",
   mode: "development",
   module: {
     rules: [
