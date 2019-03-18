@@ -16,8 +16,8 @@ setGlobal({
   ]
 });
 
-function App() {
+const App = () => {
   return <Home />;
-}
+};
 
 export default hot(module)(App);

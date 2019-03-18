@@ -1,6 +1,8 @@
 import React from "reactn";
 import Counter from "../components/Counter";
 
-export default function Home() {
+const Home = () => {
   return <Counter />;
-}
+};
+
+export default Home;

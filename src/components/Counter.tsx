@@ -1,12 +1,12 @@
 import React, { useGlobal } from "reactn";
 
-export default function Counter() {
+const Counter = () => {
   const [number, setNumber] = useGlobal("number");
   const [persos, setPerso] = useGlobal("persos");
 
   return (
     <div>
-      {persos.map(perso => (
+      {persos.map((perso: any) => (
         <div key={perso.name}>
           <h4>{perso.name}</h4>
           <small>{perso.age}</small>
@@ -20,4 +20,6 @@ export default function Counter() {
       </button>
     </div>
   );
-}
+};
+
+export default Counter;
