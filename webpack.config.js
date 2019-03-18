@@ -7,7 +7,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         exclude: /(node_modules|bower_components)/,
         loader: "babel-loader",
         options: { presets: ["@babel/env"] }
@@ -15,10 +15,14 @@ module.exports = {
       {
         test: /\.css$/,
         use: ["style-loader", "css-loader"]
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"]
       }
     ]
   },
-  resolve: { extensions: ["*", ".js", ".jsx"] },
+  resolve: { extensions: ["*", ".js", ".jsx", ".ts", ".tsx"] },
   output: {
     path: path.join(__dirname, "/dist/"),
     publicPath: "./dist/",
