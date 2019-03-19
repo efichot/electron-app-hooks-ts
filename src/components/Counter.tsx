@@ -1,24 +1,17 @@
-import React, { useGlobal } from "reactn";
+import React, { useEffect } from "react";
+import { useGlobal } from "reactn";
 
-const Counter = () => {
+const Counter: React.FC = () => {
   const [number, setNumber] = useGlobal("number");
-  const [persos, setPerso] = useGlobal("persos");
+
+  useEffect(() => {
+    console.log("cdu Counter");
+  });
 
   return (
-    <div>
-      {persos.map((perso: any) => (
-        <div key={perso.name}>
-          <h4>{perso.name}</h4>
-          <small>{perso.age}</small>
-        </div>
-      ))}
+    <>
       <button onClick={() => setNumber(number + 1)}> {number}</button>
-      <button
-        onClick={() => setPerso([...persos, { name: "Arthur", age: 26 }])}
-      >
-        add Arthur
-      </button>
-    </div>
+    </>
   );
 };
 
