@@ -11,7 +11,6 @@ const useStyles = makeStyles(theme => ({
 
 const Perso: React.FC = () => {
   const classes = useStyles();
-  console.log("TCL: Perso:React.FC -> classes", classes);
   const [persos, setPerso] = useGlobal("persos");
 
   return (
