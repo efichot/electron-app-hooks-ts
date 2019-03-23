@@ -14,7 +14,7 @@ const Perso: React.FC = () => {
   const [persos, setPerso] = useGlobal("persos");
 
   return (
-    <>
+    <div>
       {persos.map(perso => (
         <div key={perso.name}>
           <h4>{perso.name}</h4>
@@ -29,7 +29,7 @@ const Perso: React.FC = () => {
       >
         add Arthur
       </Button>
-    </>
+    </div>
   );
 };
 

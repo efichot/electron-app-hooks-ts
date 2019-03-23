@@ -1,8 +1,11 @@
 const { app, BrowserWindow, Menu, ipcMain } = require("electron");
 const fs = require("fs");
+const low = require("lowdb");
+const FileSync = require("lowdb/adapters/FileSync");
 
 let mainWindow;
 
+//Electron window
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1440,
@@ -19,6 +22,21 @@ function createWindow() {
   });
 }
 
+app.on("ready", createWindow);
+
+app.on("window-all-closed", function() {
+  if (process.platform !== "darwin") {
+    app.quit();
+  }
+});
+
+app.on("activate", function() {
+  if (mainWindow === null) {
+    createWindow();
+  }
+});
+
+// Menu Creation
 const template = [
   {
     label: "Edit",
@@ -116,28 +134,63 @@ if (process.platform === "darwin") {
 const menu = Menu.buildFromTemplate(template);
 Menu.setApplicationMenu(menu);
 
-app.on("ready", createWindow);
+// DB Init
+const adapter = new FileSync("db.json");
+const db = low(adapter);
 
-app.on("window-all-closed", function() {
-  if (process.platform !== "darwin") {
-    app.quit();
-  }
-});
+// Set some defaults (required if your JSON file is empty)
+db.defaults({ user: {}, count: 0, key: [] }).write();
 
-app.on("activate", function() {
-  if (mainWindow === null) {
-    createWindow();
-  }
-});
+// Set a user using Lodash shorthand syntax
+db.set("user.name", "typicode").write();
 
+// Increment count
+db.update("count", n => n + 1).write();
+
+// IPC listener
 ipcMain.on("openFile", (event, arg) => {
   fs.readFile(arg, "utf-8", (err, data) => {
     if (err) {
-      alert("An error ocurred reading the file :" + err.message);
+      event.sender.send(
+        "error",
+        "An error ocurred reading the file :" + err.message
+      );
       return;
     }
-    // Change how to handle the file content
-    console.log("The file content is : " + data);
-    event.sender.send("success", "File added to the db!");
+    // added the file to the db if not exist already
+    const key = db
+      .get("key")
+      .find({ data })
+      .value();
+
+    if (key) {
+      event.returnValue = false;
+      event.sender.send("error", "File already on the db!");
+    } else {
+      db.get("key")
+        .push({ data })
+        .write();
+      event.returnValue = true;
+      event.sender.send("success", "File added to the db!");
+    }
   });
+});
+
+ipcMain.on("addKey", (event, arg) => {
+  // added the file to the db if not exist already
+  const key = db
+    .get("key")
+    .find({ data: arg })
+    .value();
+
+  if (key) {
+    event.returnValue = false;
+    event.sender.send("error", "File already on the db!");
+  } else {
+    db.get("key")
+      .push({ data: arg })
+      .write();
+    event.returnValue = true;
+    event.sender.send("success", "File added to the db!");
+  }
 });

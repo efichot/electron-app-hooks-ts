@@ -7,7 +7,7 @@ const Counter: React.FC = () => {
   const [loading, setloading] = useState(false);
 
   return (
-    <>
+    <div>
       <Button
         disabled={loading}
         color="primary"
@@ -26,7 +26,7 @@ const Counter: React.FC = () => {
           number
         )}
       </Button>
-    </>
+    </div>
   );
 };
 

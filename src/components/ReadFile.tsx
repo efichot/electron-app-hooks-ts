@@ -21,13 +21,17 @@ const selectFile = e => {
         console.log("No file selected");
         return;
       }
-      ipcRenderer.send("openFile", fileNames[0]);
+      const done = ipcRenderer.sendSync("openFile", fileNames[0]);
     }
   );
 };
 
 const ReadFile: React.FC = () => {
-  return <Button onClick={selectFile}>Select a file</Button>;
+  return (
+    <div>
+      <Button onClick={selectFile}>Select a file</Button>
+    </div>
+  );
 };
 
 export default ReadFile;

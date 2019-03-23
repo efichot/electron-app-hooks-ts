@@ -45,7 +45,8 @@ setGlobal({
       name: "Janai",
       age: 26
     }
-  ]
+  ],
+  key: ""
 });
 
 const App: React.FC = () => {
