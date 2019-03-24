@@ -6,6 +6,7 @@ import { hot } from "react-hot-loader";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import { setGlobal } from "reactn";
+import "./db";
 import Home from "./pages/Home";
 
 //Toast

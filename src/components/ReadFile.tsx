@@ -1,6 +1,8 @@
 import { Button } from "@material-ui/core";
 import electron, { ipcRenderer } from "electron";
 import React from "react";
+import { toast } from "react-toastify";
+import db from "../db";
 
 const { dialog } = electron.remote;
 
@@ -18,10 +20,24 @@ const selectFile = e => {
     fileNames => {
       // fileNames is an array that contains all the selected
       if (fileNames === undefined) {
-        console.log("No file selected");
+        toast.error("No file selected");
         return;
       }
-      const done = ipcRenderer.sendSync("openFile", fileNames[0]);
+      const data = ipcRenderer.sendSync("openFile", fileNames[0]);
+
+      const exist = db
+        .get("key")
+        .find({ data })
+        .value();
+
+      if (exist) {
+        toast.error("File already on the db!");
+      } else {
+        db.get("key")
+          .push({ data })
+          .write();
+        toast.success("File added to the db!");
+      }
     }
   );
 };

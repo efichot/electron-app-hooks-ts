@@ -1,7 +1,5 @@
 const { app, BrowserWindow, Menu, ipcMain } = require("electron");
 const fs = require("fs");
-const low = require("lowdb");
-const FileSync = require("lowdb/adapters/FileSync");
 
 let mainWindow;
 
@@ -134,20 +132,7 @@ if (process.platform === "darwin") {
 const menu = Menu.buildFromTemplate(template);
 Menu.setApplicationMenu(menu);
 
-// DB Init
-const adapter = new FileSync("db.json");
-const db = low(adapter);
-
-// Set some defaults (required if your JSON file is empty)
-db.defaults({ user: {}, count: 0, key: [] }).write();
-
-// Set a user using Lodash shorthand syntax
-db.set("user.name", "typicode").write();
-
-// Increment count
-db.update("count", n => n + 1).write();
-
-// IPC listener
+// IPC listener read file
 ipcMain.on("openFile", (event, arg) => {
   fs.readFile(arg, "utf-8", (err, data) => {
     if (err) {
@@ -157,40 +142,6 @@ ipcMain.on("openFile", (event, arg) => {
       );
       return;
     }
-    // added the file to the db if not exist already
-    const key = db
-      .get("key")
-      .find({ data })
-      .value();
-
-    if (key) {
-      event.returnValue = false;
-      event.sender.send("error", "File already on the db!");
-    } else {
-      db.get("key")
-        .push({ data })
-        .write();
-      event.returnValue = true;
-      event.sender.send("success", "File added to the db!");
-    }
+    event.returnValue = data;
   });
-});
-
-ipcMain.on("addKey", (event, arg) => {
-  // added the file to the db if not exist already
-  const key = db
-    .get("key")
-    .find({ data: arg })
-    .value();
-
-  if (key) {
-    event.returnValue = false;
-    event.sender.send("error", "File already on the db!");
-  } else {
-    db.get("key")
-      .push({ data: arg })
-      .write();
-    event.returnValue = true;
-    event.sender.send("success", "File added to the db!");
-  }
 });
