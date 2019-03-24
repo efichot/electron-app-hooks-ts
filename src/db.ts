@@ -3,7 +3,7 @@ import FileSync from "lowdb/adapters/FileSync";
 
 // DB Init
 const adapter = new FileSync("db.json", {
-  defaultValue: { key: [] }
+  defaultValue: { keys: [] }
 });
 const db = low(adapter);
 

@@ -5,8 +5,9 @@ import React from "react";
 import { hot } from "react-hot-loader";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
-import { setGlobal } from "reactn";
+import { addReducer, setGlobal } from "reactn";
 import "./db";
+import db from "./db";
 import Home from "./pages/Home";
 
 //Toast
@@ -47,7 +48,39 @@ setGlobal({
       age: 26
     }
   ],
-  key: ""
+  key: "",
+  keys: db.get("keys").value()
+});
+
+addReducer("addKey", (global, data) => {
+  const exist = db
+    .get("keys")
+    .find({ data })
+    .value();
+  if (exist) {
+    toast.error("File already on the db!");
+    return {
+      keys: db.get("keys").value()
+    };
+  } else {
+    db.get("keys")
+      .push({ data })
+      .write();
+    toast.success("File added to the db!");
+    return {
+      keys: db.get("keys").value()
+    };
+  }
+});
+
+addReducer("deleteKey", (global, data) => {
+  db.get("keys")
+    .remove({ data })
+    .write();
+  toast.warn("File deleted of the db!");
+  return {
+    keys: db.get("keys").value()
+  };
 });
 
 const App: React.FC = () => {
