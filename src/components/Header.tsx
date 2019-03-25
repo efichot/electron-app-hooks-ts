@@ -17,7 +17,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import { makeStyles } from "@material-ui/styles";
 import React from "react";
 import { useGlobal } from "reactn";
-import materialIcon from "../assets/images/material_ui.png";
+const materialIcon = require("../assets/images/material-ui.png");
 
 const lightColor = "rgba(255, 255, 255, 0.7)";
 
