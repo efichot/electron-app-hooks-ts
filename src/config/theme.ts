@@ -1,5 +1,7 @@
 import { createMuiTheme } from "@material-ui/core/styles";
 
+const drawerWidth = 256;
+
 let theme = createMuiTheme({
   typography: {
     h5: {
@@ -26,7 +28,8 @@ theme = {
   overrides: {
     MuiDrawer: {
       paper: {
-        backgroundColor: "#18202c"
+        backgroundColor: "#18202c",
+        width: drawerWidth
       }
     },
     MuiButton: {
@@ -42,7 +45,7 @@ theme = {
     },
     MuiTabs: {
       root: {
-        marginLeft: theme.spacing
+        marginLeft: theme.spacing(1)
       },
       indicator: {
         height: 3,
@@ -59,17 +62,11 @@ theme = {
         [theme.breakpoints.up("md")]: {
           minWidth: 0
         }
-      },
-      labelContainer: {
-        padding: 0,
-        [theme.breakpoints.up("md")]: {
-          padding: 0
-        }
       }
     },
     MuiIconButton: {
       root: {
-        padding: theme.spacing
+        padding: theme.spacing(1)
       }
     },
     MuiTooltip: {
@@ -115,7 +112,5 @@ theme = {
     }
   }
 };
-
-const drawerWidth = 256;
 
 export { theme, drawerWidth };

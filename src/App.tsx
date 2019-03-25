@@ -4,6 +4,8 @@ import React from "react";
 import { hot } from "react-hot-loader";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
+import Content from "./components/Content";
+import Header from "./components/Header";
 import Navigator from "./components/Navigator";
 import "./config/store";
 import { drawerWidth } from "./config/theme";
@@ -23,7 +25,8 @@ const useStyles = makeStyles(theme => ({
   appContent: {
     flex: 1,
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
+    overflow: "hidden"
   },
   mainContent: {
     flex: 1,
@@ -46,12 +49,12 @@ const App: React.FC = props => {
           <Navigator />
         </Hidden>
       </nav>
-      {/* <div className={classes.appContent}>
-          <Header onDrawerToggle={this.handleDrawerToggle} />
-          <main className={classes.mainContent}>
-            <Content />
-          </main>
-        </div> */}
+      <div className={classes.appContent}>
+        <Header />
+        <main className={classes.mainContent}>
+          <Content />
+        </main>
+      </div>
       <ToastContainer />
     </div>
   );
