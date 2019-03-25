@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 import { addReducer, setGlobal } from "reactn";
-import db from "../db";
+import db from "./db";
 
 // Initial Store
 setGlobal({
