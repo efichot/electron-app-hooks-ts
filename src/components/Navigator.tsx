@@ -4,7 +4,8 @@ import {
   List,
   ListItem,
   ListItemIcon,
-  ListItemText
+  ListItemText,
+  withStyles
 } from "@material-ui/core";
 import DnsRoundedIcon from "@material-ui/icons/DnsRounded";
 import HomeIcon from "@material-ui/icons/Home";
@@ -16,10 +17,8 @@ import SettingsIcon from "@material-ui/icons/Settings";
 import SettingsEthernetIcon from "@material-ui/icons/SettingsEthernet";
 import SettingsInputComponentIcon from "@material-ui/icons/SettingsInputComponent";
 import TimerIcon from "@material-ui/icons/Timer";
-import { makeStyles } from "@material-ui/styles";
 import classNames from "classnames";
 import React from "react";
-import { theme } from "../config/theme";
 
 const categories = [
   {
@@ -43,7 +42,7 @@ const categories = [
   }
 ];
 
-const useStyles = makeStyles({
+const styles = theme => ({
   categoryHeader: {
     paddingTop: 16,
     paddingBottom: 16
@@ -88,12 +87,11 @@ const useStyles = makeStyles({
   }
 });
 
-const Navigator: React.FC = props => {
-  const classes = useStyles();
-  const { drawerWidth } = props;
+const Navigator = props => {
+  const { classes } = props;
 
   return (
-    <Drawer variant="permanent" {...drawerWidth}>
+    <Drawer variant="permanent">
       <List disablePadding>
         <ListItem
           className={classNames(
@@ -157,4 +155,4 @@ const Navigator: React.FC = props => {
   );
 };
 
-export default Navigator;
+export default withStyles(styles)(Navigator);

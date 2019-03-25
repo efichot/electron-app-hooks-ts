@@ -1,5 +1,9 @@
-import { CssBaseline, Hidden } from "@material-ui/core";
-import { makeStyles, ThemeProvider } from "@material-ui/styles";
+import {
+  CssBaseline,
+  Hidden,
+  MuiThemeProvider,
+  withStyles
+} from "@material-ui/core";
 import React from "react";
 import { hot } from "react-hot-loader";
 import { ToastContainer } from "react-toastify";
@@ -10,7 +14,7 @@ import "./config/store";
 import { drawerWidth, theme } from "./config/theme";
 import "./config/toast";
 
-const useStyles = makeStyles({
+const styles = theme => ({
   root: {
     display: "flex",
     minHeight: "100vh"
@@ -33,13 +37,12 @@ const useStyles = makeStyles({
   }
 });
 
-const App: React.FC = () => {
-  const classes = useStyles();
+const App = props => {
+  const { classes } = props;
   const [mobileOpen, setMobileOpen] = useGlobal("mobileOpen");
-  console.log(theme);
 
   return (
-    <ThemeProvider theme={theme}>
+    <MuiThemeProvider theme={theme}>
       <div className={classes.root}>
         <CssBaseline />
         <nav className={classes.drawer}>
@@ -62,8 +65,9 @@ const App: React.FC = () => {
         </div> */}
       </div>
       <ToastContainer />
-    </ThemeProvider>
+    </MuiThemeProvider>
   );
 };
 
-export default hot(module)(App);
+// @ts-ignore
+export default hot(module)(withStyles(styles)(App));
