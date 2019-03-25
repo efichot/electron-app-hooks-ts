@@ -1,20 +1,15 @@
-import {
-  CssBaseline,
-  Hidden,
-  MuiThemeProvider,
-  withStyles
-} from "@material-ui/core";
+import { CssBaseline, Hidden } from "@material-ui/core";
+import { makeStyles } from "@material-ui/styles";
 import React from "react";
 import { hot } from "react-hot-loader";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
-import { useGlobal } from "reactn";
 import Navigator from "./components/Navigator";
 import "./config/store";
-import { drawerWidth, theme } from "./config/theme";
+import { drawerWidth } from "./config/theme";
 import "./config/toast";
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     display: "flex",
     minHeight: "100vh"
@@ -35,39 +30,31 @@ const styles = theme => ({
     padding: "48px 36px 0",
     background: "#eaeff1"
   }
-});
+}));
 
-const App = props => {
-  const { classes } = props;
-  const [mobileOpen, setMobileOpen] = useGlobal("mobileOpen");
+const App: React.FC = props => {
+  const classes = useStyles();
 
   return (
-    <MuiThemeProvider theme={theme}>
-      <div className={classes.root}>
-        <CssBaseline />
-        <nav className={classes.drawer}>
-          <Hidden smUp implementation="js">
-            <Navigator
-              variant="temporary"
-              open={mobileOpen}
-              onClose={() => setMobileOpen(!mobileOpen)}
-            />
-          </Hidden>
-          <Hidden xsDown implementation="css">
-            <Navigator />
-          </Hidden>
-        </nav>
-        {/* <div className={classes.appContent}>
+    <div className={classes.root}>
+      <CssBaseline />
+      <nav className={classes.drawer}>
+        <Hidden smUp implementation="js">
+          <Navigator />
+        </Hidden>
+        <Hidden xsDown implementation="css">
+          <Navigator />
+        </Hidden>
+      </nav>
+      {/* <div className={classes.appContent}>
           <Header onDrawerToggle={this.handleDrawerToggle} />
           <main className={classes.mainContent}>
             <Content />
           </main>
         </div> */}
-      </div>
       <ToastContainer />
-    </MuiThemeProvider>
+    </div>
   );
 };
 
-// @ts-ignore
-export default hot(module)(withStyles(styles)(App));
+export default hot(module)(App);

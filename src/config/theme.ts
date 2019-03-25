@@ -1,9 +1,7 @@
-import { Theme } from "@material-ui/core";
 import { createMuiTheme } from "@material-ui/core/styles";
 
-let theme: Theme = createMuiTheme({
+let theme = createMuiTheme({
   typography: {
-    useNextVariants: true,
     h5: {
       fontWeight: 500,
       fontSize: 26,
@@ -24,6 +22,7 @@ let theme: Theme = createMuiTheme({
 
 theme = {
   ...theme,
+  // @ts-ignore
   overrides: {
     MuiDrawer: {
       paper: {
@@ -43,7 +42,7 @@ theme = {
     },
     MuiTabs: {
       root: {
-        marginLeft: theme.spacing.unit
+        marginLeft: theme.spacing
       },
       indicator: {
         height: 3,
@@ -70,7 +69,7 @@ theme = {
     },
     MuiIconButton: {
       root: {
-        padding: theme.spacing.unit
+        padding: theme.spacing
       }
     },
     MuiTooltip: {

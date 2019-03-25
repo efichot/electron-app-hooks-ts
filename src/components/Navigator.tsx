@@ -4,8 +4,7 @@ import {
   List,
   ListItem,
   ListItemIcon,
-  ListItemText,
-  withStyles
+  ListItemText
 } from "@material-ui/core";
 import DnsRoundedIcon from "@material-ui/icons/DnsRounded";
 import HomeIcon from "@material-ui/icons/Home";
@@ -17,8 +16,10 @@ import SettingsIcon from "@material-ui/icons/Settings";
 import SettingsEthernetIcon from "@material-ui/icons/SettingsEthernet";
 import SettingsInputComponentIcon from "@material-ui/icons/SettingsInputComponent";
 import TimerIcon from "@material-ui/icons/Timer";
+import { makeStyles } from "@material-ui/styles";
 import classNames from "classnames";
 import React from "react";
+import { useGlobal } from "reactn";
 
 const categories = [
   {
@@ -42,7 +43,7 @@ const categories = [
   }
 ];
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   categoryHeader: {
     paddingTop: 16,
     paddingBottom: 16
@@ -83,15 +84,20 @@ const styles = theme => ({
   },
   textDense: {},
   divider: {
-    marginTop: theme.spacing.unit * 2
+    marginTop: theme.spacing(2)
   }
-});
+}));
 
-const Navigator = props => {
-  const { classes } = props;
+const Navigator: React.FC = () => {
+  const classes = useStyles();
+  const [mobileOpen, setMobileOpen] = useGlobal("mobileOpen");
 
   return (
-    <Drawer variant="permanent">
+    <Drawer
+      variant={mobileOpen ? "temporary" : "permanent"}
+      open={mobileOpen}
+      onClose={() => setMobileOpen(!mobileOpen)}
+    >
       <List disablePadding>
         <ListItem
           className={classNames(
@@ -155,4 +161,4 @@ const Navigator = props => {
   );
 };
 
-export default withStyles(styles)(Navigator);
+export default Navigator;
