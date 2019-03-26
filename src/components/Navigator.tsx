@@ -6,6 +6,7 @@ import {
   ListItemIcon,
   ListItemText
 } from "@material-ui/core";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import DnsRoundedIcon from "@material-ui/icons/DnsRounded";
 import HomeIcon from "@material-ui/icons/Home";
 import PeopleIcon from "@material-ui/icons/People";
@@ -91,10 +92,11 @@ const useStyles = makeStyles(theme => ({
 const Navigator: React.FC = () => {
   const classes = useStyles();
   const [mobileOpen, setMobileOpen] = useGlobal("mobileOpen");
+  const sm = useMediaQuery("(max-width:600px)");
 
   return (
     <Drawer
-      variant={mobileOpen ? "temporary" : "permanent"}
+      variant={sm ? "temporary" : "permanent"}
       open={mobileOpen}
       onClose={() => setMobileOpen(!mobileOpen)}
     >

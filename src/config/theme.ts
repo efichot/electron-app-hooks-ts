@@ -43,6 +43,11 @@ theme = {
         }
       }
     },
+    MuiGrid: {
+      item: {
+        padding: "5px !important"
+      }
+    },
     MuiTabs: {
       root: {
         marginLeft: theme.spacing(1)
@@ -72,6 +77,9 @@ theme = {
     MuiTooltip: {
       tooltip: {
         borderRadius: 4
+      },
+      popper: {
+        marginLeft: "30px"
       }
     },
     MuiDivider: {

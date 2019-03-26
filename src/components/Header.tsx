@@ -40,9 +40,6 @@ const useStyles = makeStyles(theme => ({
   },
   button: {
     borderColor: lightColor
-  },
-  grid: {
-    padding: "5px"
   }
 }));
 
@@ -68,19 +65,19 @@ const Header: React.FC = () => {
               </Grid>
             </Hidden>
             <Grid item xs />
-            <Grid className={classes.grid}>
+            <Grid item>
               <Typography className={classes.link} component="a">
                 Go to docs
               </Typography>
             </Grid>
-            <Grid className={classes.grid}>
+            <Grid item>
               <Tooltip title="Alerts">
                 <IconButton color="inherit">
                   <NotificationsIcon />
                 </IconButton>
               </Tooltip>
             </Grid>
-            <Grid className={classes.grid}>
+            <Grid item>
               <IconButton color="inherit" className={classes.iconButtonAvatar}>
                 <Avatar src={materialIcon} />
               </IconButton>
@@ -102,7 +99,7 @@ const Header: React.FC = () => {
                 Authentication
               </Typography>
             </Grid>
-            <Grid className={classes.grid}>
+            <Grid item>
               <Button
                 className={classes.button}
                 variant="outlined"
@@ -112,7 +109,7 @@ const Header: React.FC = () => {
                 Web setup
               </Button>
             </Grid>
-            <Grid className={classes.grid}>
+            <Grid item>
               <Tooltip title="Help">
                 <IconButton color="inherit">
                   <HelpIcon />

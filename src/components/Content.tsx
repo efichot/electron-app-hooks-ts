@@ -49,7 +49,7 @@ const Content: React.FC = () => {
         elevation={0}
       >
         <Toolbar>
-          <Grid container spacing={10} alignItems="center">
+          <Grid container spacing={4} alignItems="center">
             <Grid item>
               <SearchIcon className={classes.block} color="inherit" />
             </Grid>
