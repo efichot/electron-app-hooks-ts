@@ -17,6 +17,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import { makeStyles } from "@material-ui/styles";
 import React from "react";
 import { useGlobal } from "reactn";
+import useReactRouter from "use-react-router";
 const materialIcon = require("../assets/images/material-ui.png");
 
 const lightColor = "rgba(255, 255, 255, 0.7)";
@@ -42,10 +43,11 @@ const useStyles = makeStyles(theme => ({
     borderColor: lightColor
   }
 }));
-
 const Header: React.FC = () => {
   const classes = useStyles();
   const [mobileOpen, setMobileOpen] = useGlobal("mobileOpen");
+  const { history, location, match } = useReactRouter();
+  const [tab, setTab] = useGlobal("tab");
 
   return (
     <>
@@ -96,7 +98,7 @@ const Header: React.FC = () => {
           <Grid container alignItems="center" spacing={4}>
             <Grid item xs>
               <Typography color="inherit" variant="h5">
-                Authentication
+                {location.pathname.split("/")[1]}
               </Typography>
             </Grid>
             <Grid item>
@@ -126,11 +128,31 @@ const Header: React.FC = () => {
         position="static"
         elevation={0}
       >
-        <Tabs value={0} textColor="inherit">
-          <Tab textColor="inherit" label="Users" />
-          <Tab textColor="inherit" label="Sign-in method" />
-          <Tab textColor="inherit" label="Templates" />
-          <Tab textColor="inherit" label="Usage" />
+        <Tabs
+          value={tab}
+          textColor="inherit"
+          onChange={(event, newValue) => setTab(newValue)}
+        >
+          <Tab
+            textColor="inherit"
+            label="Users"
+            onClick={() => history.push(`/Authentication/Users`)}
+          />
+          <Tab
+            textColor="inherit"
+            label="Sign-in method"
+            onClick={() => history.push(`/Authentication/Sign-in`)}
+          />
+          <Tab
+            textColor="inherit"
+            label="Templates"
+            onClick={() => history.push(`/Authentication/Templates`)}
+          />
+          <Tab
+            textColor="inherit"
+            label="Usage"
+            onClick={() => history.push(`/Authentication/Usage`)}
+          />
         </Tabs>
       </AppBar>
     </>

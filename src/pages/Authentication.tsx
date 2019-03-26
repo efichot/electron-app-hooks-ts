@@ -3,7 +3,6 @@ import {
   Button,
   Grid,
   IconButton,
-  Paper,
   TextField,
   Toolbar,
   Tooltip,
@@ -15,11 +14,6 @@ import { makeStyles } from "@material-ui/styles";
 import React from "react";
 
 const useStyles = makeStyles(theme => ({
-  paper: {
-    maxWidth: 936,
-    margin: "auto",
-    overflow: "hidden"
-  },
   searchBar: {
     borderBottom: "1px solid rgba(0, 0, 0, 0.12)"
   },
@@ -37,11 +31,11 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Content: React.FC = () => {
+const Authentication: React.FC = () => {
   const classes = useStyles();
 
   return (
-    <Paper className={classes.paper}>
+    <>
       <AppBar
         className={classes.searchBar}
         position="static"
@@ -85,8 +79,8 @@ const Content: React.FC = () => {
           No users for this project yet
         </Typography>
       </div>
-    </Paper>
+    </>
   );
 };
 
-export default Content;
+export default Authentication;

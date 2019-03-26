@@ -778,6 +778,11 @@
     prop-types "^15.7.2"
     react-is "^16.8.0"
 
+"@types/history@*":
+  version "4.7.2"
+  resolved "https://registry.yarnpkg.com/@types/history/-/history-4.7.2.tgz#0e670ea254d559241b6eeb3894f8754991e73220"
+  integrity sha512-ui3WwXmjTaY73fOQ3/m3nnajU/Orhi6cEu5rzX+BrAAJxa3eITXZ5ch9suPqtM03OWhAHhPSyBGCN4UKoxO20Q==
+
 "@types/node@^10.12.18":
   version "10.14.1"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.14.1.tgz#8701cd760acc20beba5ffe0b7a1b879f39cb8c41"
@@ -798,6 +803,23 @@
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.8.2.tgz#9bd7d33f908b243ff0692846ef36c81d4941ad12"
   integrity sha512-MX7n1wq3G/De15RGAAqnmidzhr2Y9O/ClxPxyqaNg96pGyeXUYPSvujgzEVpLo9oIP4Wn1UETl+rxTN02KEpBw==
   dependencies:
+    "@types/react" "*"
+
+"@types/react-router-dom@^4.3.1":
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/@types/react-router-dom/-/react-router-dom-4.3.1.tgz#71fe2918f8f60474a891520def40a63997dafe04"
+  integrity sha512-GbztJAScOmQ/7RsQfO4cd55RuH1W4g6V1gDW3j4riLlt+8yxYLqqsiMzmyuXBLzdFmDtX/uU2Bpcm0cmudv44A==
+  dependencies:
+    "@types/history" "*"
+    "@types/react" "*"
+    "@types/react-router" "*"
+
+"@types/react-router@*":
+  version "4.4.5"
+  resolved "https://registry.yarnpkg.com/@types/react-router/-/react-router-4.4.5.tgz#1166997dc7eef2917b5ebce890ebecb32ee5c1b3"
+  integrity sha512-12+VOu1+xiC8RPc9yrgHCyLI79VswjtuqeS2gPrMcywH6tkc8rGIUhs4LaL3AJPqo5d+RPnfRpNKiJ7MK2Qhcg==
+  dependencies:
+    "@types/history" "*"
     "@types/react" "*"
 
 "@types/react-transition-group@^2.0.16":
@@ -6630,10 +6652,17 @@ url@^0.11.0:
     punycode "1.3.2"
     querystring "0.2.0"
 
-use-force-update@^1.0.0:
+use-force-update@^1.0.0, use-force-update@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/use-force-update/-/use-force-update-1.0.4.tgz#7e9b55b32b7eb947a2187e5c87e047c7f6c4481b"
   integrity sha512-/tF1kH4p4KwuJeA9De0hzPXi48JTk9fEwlBnZ8fUOTcDYwKuLiMPVOFrN0RzbcKLgcVog/74kTRCiHfu93ju+g==
+
+use-react-router@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/use-react-router/-/use-react-router-1.0.5.tgz#509d930ad1110f25ff97a88c96c104487f85760f"
+  integrity sha512-huk5DhGio0RYjCngZ+DyTOQ4NqC+hsZ6N78KABkgT6Y2BSJYQkBpqob3gxZBlt+h7Q7YMkH5QZo7mYIW14jhOg==
+  dependencies:
+    use-force-update "^1.0.4"
 
 use@^3.1.0:
   version "3.1.1"

@@ -20,13 +20,15 @@ import TimerIcon from "@material-ui/icons/Timer";
 import { makeStyles } from "@material-ui/styles";
 import classNames from "classnames";
 import React from "react";
+import { Link } from "react-router-dom";
 import { useGlobal } from "reactn";
+import useReactRouter from "use-react-router";
 
 const categories = [
   {
     id: "Develop",
     children: [
-      { id: "Authentication", icon: <PeopleIcon />, active: true },
+      { id: "Authentication", icon: <PeopleIcon /> },
       { id: "Database", icon: <DnsRoundedIcon /> },
       { id: "Storage", icon: <PermMediaOutlinedIcon /> },
       { id: "Hosting", icon: <PublicIcon /> },
@@ -86,13 +88,18 @@ const useStyles = makeStyles(theme => ({
   textDense: {},
   divider: {
     marginTop: theme.spacing(2)
+  },
+  link: {
+    textDecoration: "none"
   }
 }));
-
 const Navigator: React.FC = () => {
   const classes = useStyles();
   const [mobileOpen, setMobileOpen] = useGlobal("mobileOpen");
   const sm = useMediaQuery("(max-width:600px)");
+  const [tab, setTab] = useGlobal("tab");
+  const { location } = useReactRouter();
+  const page = location.pathname.split("/")[1];
 
   return (
     <Drawer
@@ -133,27 +140,33 @@ const Navigator: React.FC = () => {
                 {id}
               </ListItemText>
             </ListItem>
-            {children.map(({ id: childId, icon, active }) => (
-              <ListItem
-                button
-                dense
+            {children.map(({ id: childId, icon }) => (
+              <Link
+                to={`/${childId}`}
                 key={childId}
-                className={classNames(
-                  classes.item,
-                  classes.itemActionable,
-                  active && classes.itemActiveItem
-                )}
+                className={classes.link}
+                onClick={() => setTab(0)}
               >
-                <ListItemIcon>{icon}</ListItemIcon>
-                <ListItemText
-                  classes={{
-                    primary: classes.itemPrimary,
-                    textDense: classes.textDense
-                  }}
+                <ListItem
+                  button
+                  dense
+                  className={classNames(
+                    classes.item,
+                    classes.itemActionable,
+                    page === childId && classes.itemActiveItem
+                  )}
                 >
-                  {childId}
-                </ListItemText>
-              </ListItem>
+                  <ListItemIcon>{icon}</ListItemIcon>
+                  <ListItemText
+                    classes={{
+                      primary: classes.itemPrimary,
+                      textDense: classes.textDense
+                    }}
+                  >
+                    {childId}
+                  </ListItemText>
+                </ListItem>
+              </Link>
             ))}
             <Divider className={classes.divider} />
           </React.Fragment>

@@ -5,6 +5,7 @@ import db from "./db";
 // Initial Store
 setGlobal({
   mobileOpen: false,
+  tab: 0,
   key: "",
   keys: db.get("keys").value()
 });
