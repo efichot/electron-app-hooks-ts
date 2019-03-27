@@ -11,6 +11,7 @@ import { drawerWidth } from "./config/theme";
 import "./config/toast";
 import Authentication from "./pages/Authentication";
 import Database from "./pages/Database";
+import Storage from "./pages/Storage";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -42,6 +43,7 @@ const App: React.FC = props => {
         <Switch>
           <Route path="/Authentication" component={Authentication} />
           <Route path="/Database" component={Database} />
+          <Route path="/Storage" component={Storage} />
           <Redirect to="/Authentication" />
         </Switch>
         <ToastContainer />

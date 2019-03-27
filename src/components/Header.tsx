@@ -45,7 +45,7 @@ const useStyles = makeStyles(theme => ({
 }));
 interface Props {
   page: string;
-  tabs: string[];
+  tabs?: string[];
 }
 
 const Header: React.FC<Props> = props => {
@@ -139,13 +139,15 @@ const Header: React.FC<Props> = props => {
           textColor="inherit"
           onChange={(event, newValue) => setTab(newValue)}
         >
-          {tabs.map(tab => (
-            <Tab
-              textColor="inherit"
-              label={tab}
-              onClick={() => history.push(`/${page}/${tab}`)}
-            />
-          ))}
+          {tabs &&
+            tabs.map(tab => (
+              <Tab
+                key={tab}
+                textColor="inherit"
+                label={tab}
+                onClick={() => history.push(`/${page}/${tab}`)}
+              />
+            ))}
         </Tabs>
       </AppBar>
     </>

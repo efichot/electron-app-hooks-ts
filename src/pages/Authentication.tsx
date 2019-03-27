@@ -1,21 +1,12 @@
-import {
-  AppBar,
-  Button,
-  Grid,
-  IconButton,
-  Paper,
-  TextField,
-  Toolbar,
-  Tooltip,
-  Typography
-} from "@material-ui/core";
-import RefreshIcon from "@material-ui/icons/Refresh";
-import SearchIcon from "@material-ui/icons/Search";
+import { Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import React from "react";
+import { Redirect, Route, Switch } from "react-router-dom";
 import Header from "../components/Header";
+import Sign_in from "./Authentication/Sign_in";
+import Users from "./Authentication/Users";
 
-const tabs = ["One", "Two", "Three", "Four"];
+const tabs = ["Users", "Sign-in", "Template", "Usage"];
 
 const useStyles = makeStyles(theme => ({
   appContent: {
@@ -59,49 +50,11 @@ const Authentication: React.FC = () => {
       <Header page="Authentication" tabs={tabs} />
       <main className={classes.mainContent}>
         <Paper className={classes.paper}>
-          <AppBar
-            className={classes.searchBar}
-            position="static"
-            color="default"
-            elevation={0}
-          >
-            <Toolbar>
-              <Grid container spacing={4} alignItems="center">
-                <Grid item>
-                  <SearchIcon className={classes.block} color="inherit" />
-                </Grid>
-                <Grid item xs>
-                  <TextField
-                    fullWidth
-                    placeholder="Search by email address, phone number, or user UID"
-                    InputProps={{
-                      disableUnderline: true,
-                      className: classes.searchInput
-                    }}
-                  />
-                </Grid>
-                <Grid item>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    className={classes.addUser}
-                  >
-                    Add user
-                  </Button>
-                  <Tooltip title="Reload">
-                    <IconButton>
-                      <RefreshIcon className={classes.block} color="inherit" />
-                    </IconButton>
-                  </Tooltip>
-                </Grid>
-              </Grid>
-            </Toolbar>
-          </AppBar>
-          <div className={classes.contentWrapper}>
-            <Typography color="textSecondary" align="center">
-              No users for this project yet
-            </Typography>
-          </div>
+          <Switch>
+            <Route path="/Authentication/Users" component={Users} />
+            <Route path="/Authentication/Sign-in" component={Sign_in} />
+            <Redirect to="/Authentication/Users" />
+          </Switch>
         </Paper>
       </main>
     </div>

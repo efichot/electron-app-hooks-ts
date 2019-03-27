@@ -97,7 +97,6 @@ const Navigator: React.FC = () => {
   const classes = useStyles();
   const [mobileOpen, setMobileOpen] = useGlobal("mobileOpen");
   const sm = useMediaQuery("(max-width:600px)");
-  const [tab, setTab] = useGlobal("tab");
   const { location } = useReactRouter();
   const page = location.pathname.split("/")[1];
 
@@ -141,12 +140,7 @@ const Navigator: React.FC = () => {
               </ListItemText>
             </ListItem>
             {children.map(({ id: childId, icon }) => (
-              <Link
-                to={`/${childId}`}
-                key={childId}
-                className={classes.link}
-                onClick={() => setTab(0)}
-              >
+              <Link to={`/${childId}`} key={childId} className={classes.link}>
                 <ListItem
                   button
                   dense

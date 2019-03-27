@@ -1,8 +1,12 @@
-import { makeStyles, Paper, Typography } from "@material-ui/core";
+import { Paper } from "@material-ui/core";
+import { makeStyles } from "@material-ui/styles";
 import React from "react";
+import { Redirect, Route, Switch } from "react-router-dom";
 import Header from "../components/Header";
+import One from "./Database/One";
+import Two from "./Database/Two";
 
-const tabs = ["Five", "Six", "Seven"];
+const tabs = ["One", "Two"];
 
 const useStyles = makeStyles(theme => ({
   appContent: {
@@ -21,6 +25,18 @@ const useStyles = makeStyles(theme => ({
     margin: "auto",
     overflow: "hidden"
   },
+  searchBar: {
+    borderBottom: "1px solid rgba(0, 0, 0, 0.12)"
+  },
+  searchInput: {
+    fontSize: theme.typography.fontSize
+  },
+  block: {
+    display: "block"
+  },
+  addUser: {
+    marginRight: theme.spacing(1)
+  },
   contentWrapper: {
     margin: "40px 16px"
   }
@@ -28,16 +44,17 @@ const useStyles = makeStyles(theme => ({
 
 const Database: React.FC = () => {
   const classes = useStyles();
+
   return (
     <div className={classes.appContent}>
       <Header page="Database" tabs={tabs} />
       <main className={classes.mainContent}>
         <Paper className={classes.paper}>
-          <div className={classes.contentWrapper}>
-            <Typography color="textSecondary" align="center">
-              No users for this project yet
-            </Typography>
-          </div>
+          <Switch>
+            <Route path="/Database/One" component={One} />
+            <Route path="/Database/Two" component={Two} />
+            <Redirect to="/Database/One" />
+          </Switch>
         </Paper>
       </main>
     </div>
