@@ -3,12 +3,6 @@ import React from "react";
 import Header from "./Header";
 
 const useStyles = makeStyles(theme => ({
-  appContent: {
-    flex: 1,
-    display: "flex",
-    flexDirection: "column",
-    overflow: "hidden"
-  },
   mainContent: {
     flex: 1,
     padding: "48px 36px 0",
@@ -45,12 +39,12 @@ const WrapperHeaderPaper: React.FC<Props> = ({ page, tabs, children }) => {
   const classes = useStyles();
 
   return (
-    <div className={classes.appContent}>
+    <>
       <Header page={page} tabs={tabs} />
       <main className={classes.mainContent}>
         <Paper className={classes.paper}>{children}</Paper>
       </main>
-    </div>
+    </>
   );
 };
 

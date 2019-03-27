@@ -23,6 +23,12 @@ const useStyles = makeStyles(theme => ({
       width: drawerWidth,
       flexShrink: 0
     }
+  },
+  appContent: {
+    flex: 1,
+    display: "flex",
+    flexDirection: "column",
+    overflow: "hidden"
   }
 }));
 
@@ -40,13 +46,15 @@ const App: React.FC = props => {
             <Navigator />
           </Hidden>
         </nav>
-        <Switch>
-          <Route path="/Authentication" component={Authentication} />
-          <Route path="/Database" component={Database} />
-          <Route path="/Storage" component={Storage} />
-          <Redirect to="/Authentication" />
-        </Switch>
-        <ToastContainer />
+        <div className={classes.appContent}>
+          <Switch>
+            <Route path="/Authentication" component={Authentication} />
+            <Route path="/Database" component={Database} />
+            <Route path="/Storage" component={Storage} />
+            <Redirect to="/Authentication" />
+          </Switch>
+          <ToastContainer />
+        </div>
       </HashRouter>
     </div>
   );
