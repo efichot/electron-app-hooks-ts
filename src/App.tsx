@@ -1,13 +1,15 @@
 import { Hidden } from "@material-ui/core";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { makeStyles } from "@material-ui/styles";
 import React from "react";
 import { hot } from "react-hot-loader";
 import { HashRouter, Redirect, Route, Switch } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
-import Navigator from "./components/Navigator";
+import { useGlobal } from "reactn";
+import Drawer from "./components/Drawer";
+import MiniDrawer from "./components/MiniDrawer";
 import "./config/store";
-import { drawerWidth } from "./config/theme";
 import "./config/toast";
 import Authentication from "./pages/Authentication";
 import Database from "./pages/Database";
@@ -20,7 +22,6 @@ const useStyles = makeStyles(theme => ({
   },
   drawer: {
     [theme.breakpoints.up("sm")]: {
-      width: drawerWidth,
       flexShrink: 0
     }
   },
@@ -34,16 +35,21 @@ const useStyles = makeStyles(theme => ({
 
 const App: React.FC = props => {
   const classes = useStyles();
+  const [miniDrawer, setMiniDrawer] = useGlobal("miniDrawer");
+  const sm = useMediaQuery("(max-width:600px)");
 
   return (
     <div className={classes.root}>
       <HashRouter>
-        <nav className={classes.drawer}>
+        <nav
+          className={classes.drawer}
+          style={{ width: sm ? "0px" : miniDrawer ? "66px" : "256px" }}
+        >
           <Hidden smUp implementation="js">
-            <Navigator />
+            {miniDrawer ? <MiniDrawer /> : <Drawer />}
           </Hidden>
           <Hidden xsDown implementation="css">
-            <Navigator />
+            {miniDrawer ? <MiniDrawer /> : <Drawer />}
           </Hidden>
         </nav>
         <div className={classes.appContent}>

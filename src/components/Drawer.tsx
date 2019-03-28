@@ -1,52 +1,30 @@
 import {
   Divider,
   Drawer,
+  IconButton,
   List,
   ListItem,
   ListItemIcon,
-  ListItemText
+  ListItemText,
+  Menu,
+  MenuItem,
+  Tooltip
 } from "@material-ui/core";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import DnsRoundedIcon from "@material-ui/icons/DnsRounded";
 import HomeIcon from "@material-ui/icons/Home";
-import PeopleIcon from "@material-ui/icons/People";
-import PhonelinkSetupIcon from "@material-ui/icons/PhonelinkSetup";
-import PermMediaOutlinedIcon from "@material-ui/icons/PhotoSizeSelectActual";
-import PublicIcon from "@material-ui/icons/Public";
 import SettingsIcon from "@material-ui/icons/Settings";
-import SettingsEthernetIcon from "@material-ui/icons/SettingsEthernet";
-import SettingsInputComponentIcon from "@material-ui/icons/SettingsInputComponent";
-import TimerIcon from "@material-ui/icons/Timer";
 import { makeStyles } from "@material-ui/styles";
 import classNames from "classnames";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useGlobal } from "reactn";
 import useReactRouter from "use-react-router";
-
-const categories = [
-  {
-    id: "Develop",
-    children: [
-      { id: "Authentication", icon: <PeopleIcon /> },
-      { id: "Database", icon: <DnsRoundedIcon /> },
-      { id: "Storage", icon: <PermMediaOutlinedIcon /> },
-      { id: "Hosting", icon: <PublicIcon /> },
-      { id: "Functions", icon: <SettingsEthernetIcon /> },
-      { id: "ML Kit", icon: <SettingsInputComponentIcon /> }
-    ]
-  },
-  {
-    id: "Quality",
-    children: [
-      { id: "Analytics", icon: <SettingsIcon /> },
-      { id: "Performance", icon: <TimerIcon /> },
-      { id: "Test Lab", icon: <PhonelinkSetupIcon /> }
-    ]
-  }
-];
+import { categories, logo, settings } from "../config/drawer";
 
 const useStyles = makeStyles(theme => ({
+  paper: {
+    width: "256px"
+  },
   categoryHeader: {
     paddingTop: 16,
     paddingBottom: 16
@@ -91,11 +69,28 @@ const useStyles = makeStyles(theme => ({
   },
   link: {
     textDecoration: "none"
+  },
+  logo: {
+    width: "40px",
+    marginRight: "5px"
+  },
+  dividerSettings: {
+    transform: "rotate(90deg)",
+    width: "35px",
+    position: "absolute",
+    right: "30px",
+    top: "25px"
+  },
+  settings: {
+    position: "absolute",
+    top: "7px",
+    right: "2px"
   }
 }));
 const Navigator: React.FC = () => {
   const classes = useStyles();
   const [mobileOpen, setMobileOpen] = useGlobal("mobileOpen");
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const sm = useMediaQuery("(max-width:600px)");
   const { location } = useReactRouter();
   const page = location.pathname.split("/")[1];
@@ -105,6 +100,7 @@ const Navigator: React.FC = () => {
       variant={sm ? "temporary" : "permanent"}
       open={mobileOpen}
       onClose={() => setMobileOpen(!mobileOpen)}
+      classes={{ paper: classes.paper }}
     >
       <List disablePadding>
         <ListItem
@@ -114,6 +110,7 @@ const Navigator: React.FC = () => {
             classes.itemCategory
           )}
         >
+          <img alt="logo" src={logo} className={classes.logo} />
           Paperbase
         </ListItem>
         <ListItem className={classNames(classes.item, classes.itemCategory)}>
@@ -126,6 +123,28 @@ const Navigator: React.FC = () => {
             }}
           >
             Project Overview
+            <Divider className={classes.dividerSettings} />
+            <Tooltip title="Settings" placement="bottom-end">
+              <IconButton
+                color="inherit"
+                className={classes.settings}
+                onClick={e => setAnchorEl(e.currentTarget)}
+              >
+                <SettingsIcon />
+              </IconButton>
+            </Tooltip>
+            <Menu
+              id="simple-menu"
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={() => setAnchorEl(null)}
+            >
+              {settings.map(setting => (
+                <MenuItem key={setting} onClick={() => setAnchorEl(null)}>
+                  {setting}
+                </MenuItem>
+              ))}
+            </Menu>
           </ListItemText>
         </ListItem>
         {categories.map(({ id, children }) => (

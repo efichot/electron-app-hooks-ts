@@ -1,7 +1,5 @@
 import { createMuiTheme } from "@material-ui/core/styles";
 
-const drawerWidth = 256;
-
 let theme = createMuiTheme({
   typography: {
     h5: {
@@ -28,8 +26,7 @@ theme = {
   overrides: {
     MuiDrawer: {
       paper: {
-        backgroundColor: "#18202c",
-        width: drawerWidth
+        backgroundColor: "#18202c"
       }
     },
     MuiButton: {
@@ -121,4 +118,4 @@ theme = {
   }
 };
 
-export { theme, drawerWidth };
+export default theme;

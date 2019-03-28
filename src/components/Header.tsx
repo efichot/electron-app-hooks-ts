@@ -18,7 +18,7 @@ import { makeStyles } from "@material-ui/styles";
 import React, { useState } from "react";
 import { useGlobal } from "reactn";
 import useReactRouter from "use-react-router";
-const materialIcon = require("../assets/images/material-ui.png");
+const materialIcon = require("../assets/images/material-ui-avatar.png");
 
 const lightColor = "rgba(255, 255, 255, 0.7)";
 
