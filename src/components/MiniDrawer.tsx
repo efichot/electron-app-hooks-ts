@@ -10,6 +10,7 @@ import {
   Tooltip
 } from "@material-ui/core";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import HomeIcon from "@material-ui/icons/Home";
 import SettingsIcon from "@material-ui/icons/Settings";
 import { makeStyles } from "@material-ui/styles";
@@ -55,12 +56,24 @@ const useStyles = makeStyles(theme => ({
   },
   settings: {
     padding: "0 0 0 5px"
+  },
+
+  switch: {
+    position: "absolute",
+    bottom: "0px",
+    width: "100%",
+    cursor: "pointer"
+  },
+  chevron: {
+    fontSize: "30px",
+    paddingLeft: "5px"
   }
 }));
 
 const MiniDrawer: React.FC = () => {
   const classes = useStyles();
   const [mobileOpen, setMobileOpen] = useGlobal("mobileOpen");
+  const [miniDrawer, setMiniDrawer] = useGlobal("miniDrawer");
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const sm = useMediaQuery("(max-width:600px)");
   const { location } = useReactRouter();
@@ -145,6 +158,18 @@ const MiniDrawer: React.FC = () => {
           </div>
         ))}
       </List>
+      <div
+        className={classes.switch}
+        onClick={() => setMiniDrawer(!miniDrawer)}
+      >
+        <Divider className={classes.divider} />
+        <ListItem
+          className={classNames(classes.item, classes.itemCategory)}
+          style={{ float: "right" }}
+        >
+          <ChevronRightIcon className={classes.chevron} />
+        </ListItem>
+      </div>
     </Drawer>
   );
 };
