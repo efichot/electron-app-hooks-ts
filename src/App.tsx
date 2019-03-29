@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/styles";
 import React from "react";
 import { hot } from "react-hot-loader";
 import { HashRouter, Redirect, Route, Switch } from "react-router-dom";
+import { animated, useSpring } from "react-spring";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import { useGlobal } from "reactn";
@@ -33,25 +34,26 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const App: React.FC = props => {
+const App: React.FC = () => {
   const classes = useStyles();
   const [miniDrawer, setMiniDrawer] = useGlobal("miniDrawer");
   const sm = useMediaQuery("(max-width:600px)");
 
+  const spring = useSpring({
+    width: sm ? "0px" : miniDrawer ? "66px" : "256px",
+  });
+
   return (
     <div className={classes.root}>
       <HashRouter>
-        <nav
-          className={classes.drawer}
-          style={{ width: sm ? "0px" : miniDrawer ? "66px" : "256px" }}
-        >
+        <animated.div className={classes.drawer} style={spring}>
           <Hidden smUp implementation="js">
             {miniDrawer ? <MiniDrawer /> : <Drawer />}
           </Hidden>
           <Hidden xsDown implementation="css">
             {miniDrawer ? <MiniDrawer /> : <Drawer />}
           </Hidden>
-        </nav>
+        </animated.div>
         <div className={classes.appContent}>
           <Switch>
             <Route path="/Authentication" component={Authentication} />
