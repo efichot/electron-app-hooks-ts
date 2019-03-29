@@ -20,11 +20,7 @@ module.exports = {
         test: /\.(pdf|jpg|png|gif|svg|ico)$/,
         use: [
           {
-            loader: "url-loader",
-            options: {
-              limit: 10000,
-              name: "static/media/[name].[hash:8].[ext]"
-            }
+            loader: "url-loader"
           }
         ]
       }

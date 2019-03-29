@@ -67,6 +67,9 @@ const useStyles = makeStyles(theme => ({
   chevron: {
     fontSize: "30px",
     paddingLeft: "5px"
+  },
+  icons: {
+    padding: "0 0 0 7px"
   }
 }));
 
@@ -136,7 +139,7 @@ const MiniDrawer: React.FC = () => {
           </Menu>
         </ListItem>
         {categories.map(({ id, children }) => (
-          <div key={id} style={{ marginTop: "10px", paddingLeft: "7px" }}>
+          <div key={id} style={{ marginTop: "10px" }}>
             {children.map(({ id: childId, icon }) => (
               <Link to={`/${childId}`} key={childId} className={classes.link}>
                 <Tooltip title={childId} placement="right">
@@ -149,7 +152,9 @@ const MiniDrawer: React.FC = () => {
                       page === childId && classes.itemActiveItem
                     )}
                   >
-                    <ListItemIcon>{icon}</ListItemIcon>
+                    <ListItemIcon className={classes.icons}>
+                      {icon}
+                    </ListItemIcon>
                   </ListItem>
                 </Tooltip>
               </Link>

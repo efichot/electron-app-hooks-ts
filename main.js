@@ -5,10 +5,6 @@ const {
   REACT_DEVELOPER_TOOLS
 } = require("electron-devtools-installer");
 
-installExtension(REACT_DEVELOPER_TOOLS)
-  .then(name => console.log(`Added Extension:  ${name}`))
-  .catch(err => console.log("An error occurred: ", err));
-
 let mainWindow;
 
 //Electron window
@@ -26,6 +22,11 @@ function createWindow() {
   mainWindow.on("closed", function() {
     mainWindow = null;
   });
+
+  // React extension
+  installExtension(REACT_DEVELOPER_TOOLS)
+    .then(name => console.log(`Added Extension:  ${name}`))
+    .catch(err => console.log("An error occurred: ", err));
 }
 
 app.on("ready", createWindow);

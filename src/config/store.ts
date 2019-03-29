@@ -1,13 +1,23 @@
+import { remote } from "electron";
 import { toast } from "react-toastify";
-import { addReducer, setGlobal } from "reactn";
+import { addReducer, getGlobal, setGlobal } from "reactn";
 import db from "./db";
+
+// Old store
+let oldStore: any = localStorage.getItem("store");
+oldStore = JSON.parse(oldStore);
 
 // Initial Store
 setGlobal({
   mobileOpen: false,
-  miniDrawer: false,
+  miniDrawer: oldStore ? oldStore.miniDrawer : false,
   key: "",
   keys: db.get("keys").value()
+});
+
+// Persist Store
+remote.getCurrentWindow().on("close", () => {
+  localStorage.setItem("store", JSON.stringify(getGlobal()));
 });
 
 // Reducers

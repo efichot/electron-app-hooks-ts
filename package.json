@@ -12,7 +12,7 @@
   "scripts": {
     "dev": "webpack --watch",
     "start": "electron .",
-    "build": "webpack && electron-builder"
+    "build": "rimraf dist && webpack && electron-builder"
   },
   "repository": "https://github.com/f-prime/electron-react-boilerplate-minimal",
   "keywords": [
@@ -39,7 +39,6 @@
     "css-loader": "^2.1.0",
     "electron": "^4.0.4",
     "electron-builder": "^20.39.0",
-    "electron-devtools-installer": "^2.2.4",
     "file-loader": "^3.0.1",
     "react-hot-loader": "^4.7.0",
     "style-loader": "^0.23.1",
@@ -54,6 +53,7 @@
     "@material-ui/styles": "^4.0.0-alpha.5",
     "babel-core": "^6.26.3",
     "classnames": "^2.2.6",
+    "electron-devtools-installer": "^2.2.4",
     "lowdb": "^1.0.0",
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
