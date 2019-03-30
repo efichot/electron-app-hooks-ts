@@ -12,6 +12,7 @@ import RefreshIcon from "@material-ui/icons/Refresh";
 import SearchIcon from "@material-ui/icons/Search";
 import { makeStyles } from "@material-ui/styles";
 import React from "react";
+import MenuSnack from "../../components/MenuSnack";
 
 const useStyles = makeStyles(theme => ({
   searchBar: {
@@ -70,6 +71,7 @@ const Users: React.FC = () => {
                   <RefreshIcon className={classes.block} color="inherit" />
                 </IconButton>
               </Tooltip>
+              <MenuSnack menu={["Add", "Edit", "Delete"]} />
             </Grid>
           </Grid>
         </Toolbar>
