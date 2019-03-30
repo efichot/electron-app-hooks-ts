@@ -24,7 +24,8 @@ import { categories, logo, settings } from "../config/drawer";
 
 const useStyles = makeStyles(theme => ({
   paper: {
-    width: "256px"
+    width: "256px",
+    overflow: "hidden"
   },
   categoryHeader: {
     paddingTop: 16,
@@ -47,7 +48,8 @@ const useStyles = makeStyles(theme => ({
   firebase: {
     fontSize: 24,
     fontFamily: theme.typography.fontFamily,
-    color: theme.palette.common.white
+    color: theme.palette.common.white,
+    padding: "20px"
   },
   itemActionable: {
     "&:hover": {
@@ -88,10 +90,10 @@ const useStyles = makeStyles(theme => ({
     right: "2px"
   },
   switch: {
-    position: "absolute",
+    position: "fixed",
     bottom: "0px",
-    width: "100%",
-    cursor: "pointer"
+    cursor: "pointer",
+    width: "256px"
   },
   chevron: {
     fontSize: "30px",
@@ -115,17 +117,17 @@ const Navigator: React.FC = () => {
       onClose={() => setMobileOpen(!mobileOpen)}
       classes={{ paper: classes.paper }}
     >
-      <List disablePadding>
-        <ListItem
-          className={classNames(
-            classes.firebase,
-            classes.item,
-            classes.itemCategory
-          )}
-        >
-          <img alt="logo" src={logo} className={classes.logo} />
-          Paperbase
-        </ListItem>
+      <ListItem
+        className={classNames(
+          classes.firebase,
+          classes.item,
+          classes.itemCategory
+        )}
+      >
+        <img alt="logo" src={logo} className={classes.logo} />
+        Paperbase
+      </ListItem>
+      <List disablePadding style={{ overflow: "auto", marginBottom: "50px" }}>
         <ListItem className={classNames(classes.item, classes.itemCategory)}>
           <ListItemIcon>
             <HomeIcon />

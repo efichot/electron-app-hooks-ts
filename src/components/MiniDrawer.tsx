@@ -23,7 +23,8 @@ import { categories, logo, settings } from "../config/drawer";
 
 const useStyles = makeStyles(theme => ({
   paper: {
-    width: "66px"
+    width: "66px",
+    overflow: "hidden"
   },
   item: {
     paddingTop: 4,
@@ -52,17 +53,18 @@ const useStyles = makeStyles(theme => ({
   },
   logo: {
     width: "40px",
-    marginRight: "5px"
+    marginRight: "5px",
+    marginTop: "5px"
   },
   settings: {
     padding: "0 0 0 5px"
   },
 
   switch: {
-    position: "absolute",
+    position: "fixed",
     bottom: "0px",
-    width: "100%",
-    cursor: "pointer"
+    cursor: "pointer",
+    width: "66px"
   },
   chevron: {
     fontSize: "30px",
@@ -89,10 +91,13 @@ const MiniDrawer: React.FC = () => {
       onClose={() => setMobileOpen(!mobileOpen)}
       classes={{ paper: classes.paper }}
     >
-      <List disablePadding>
-        <ListItem className={classNames(classes.item, classes.itemCategory)}>
-          <img alt="logo" src={logo} className={classes.logo} />
-        </ListItem>
+      <ListItem
+        className={classNames(classes.item, classes.itemCategory)}
+        style={{ paddingBottom: "15px" }}
+      >
+        <img alt="logo" src={logo} className={classes.logo} />
+      </ListItem>
+      <List disablePadding style={{ overflow: "auto", marginBottom: "50px" }}>
         <Link to={`/Home`} className={classes.link}>
           <ListItem
             button

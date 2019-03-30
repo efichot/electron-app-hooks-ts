@@ -40,7 +40,7 @@ const App: React.FC = () => {
   const sm = useMediaQuery("(max-width:600px)");
 
   const spring = useSpring({
-    width: sm ? "0px" : miniDrawer ? "66px" : "256px",
+    width: sm ? "0px" : miniDrawer ? "66px" : "256px"
   });
 
   return (
