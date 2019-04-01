@@ -61,6 +61,7 @@
     "react-spring": "^8.0.18",
     "react-toastify": "^4.5.2",
     "reactn": "^1.0.0",
+    "rimraf": "^2.6.3",
     "use-react-router": "^1.0.5",
     "yarn": "^1.13.0"
   }
